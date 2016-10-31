@@ -13,79 +13,94 @@ package modelBean;
 public class BeanPaciente {
     private int codigo;
     private String nome;
-    private String especialidade;
-    private int crm;
+    private String nascimento;
+    private String rg;
+    private String telefone;
+    private String rua;
+    private String cep;
+    private String complemento;
+    private String bairro;
     private String pesquisa;
 
-    /**
-     * @return the codigo
-     */
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+    
+
     public int getCodigo() {
         return codigo;
     }
 
-    /**
-     * @param codigo the codigo to set
-     */
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
-    /**
-     * @return the nome
-     */
     public String getNome() {
         return nome;
     }
 
-    /**
-     * @param nome the nome to set
-     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    /**
-     * @return the especialidade
-     */
-    public String getEspecialidade() {
-        return especialidade;
+    public String getNascimento() {
+        return nascimento;
     }
 
-    /**
-     * @param especialidade the especialidade to set
-     */
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
+    public void setNascimento(String nascimento) {
+        this.nascimento = nascimento;
     }
 
-    /**
-     * @return the crm
-     */
-    public int getCrm() {
-        return crm;
+    public String getRg() {
+        return rg;
     }
 
-    /**
-     * @param crm the crm to set
-     */
-    public void setCrm(int crm) {
-        this.crm = crm;
+    public void setRg(String rg) {
+        this.rg = rg;
     }
 
-    /**
-     * @return the pesquisa
-     */
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
     public String getPesquisa() {
         return pesquisa;
     }
 
-    /**
-     * @param pesquisa the pesquisa to set
-     */
-    public void setPesquisa(String pesquisa) {
-        this.pesquisa = pesquisa;
+    public void setPesquisa(String pesquisar) {
+        this.pesquisa = pesquisar;
     }
-    
-    
-}
+
+} 
