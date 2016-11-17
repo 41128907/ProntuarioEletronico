@@ -147,8 +147,18 @@ public class FormPaciente extends javax.swing.JFrame {
 
         jLabel7.setText("Telefone:");
 
+        try {
+            jFormattedTextFieldRG.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jFormattedTextFieldRG.setEnabled(false);
 
+        try {
+            jFormattedTextFieldTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jFormattedTextFieldTelefone.setEnabled(false);
         jFormattedTextFieldTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +166,11 @@ public class FormPaciente extends javax.swing.JFrame {
             }
         });
 
+        try {
+            jFormattedTextFieldNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jFormattedTextFieldNascimento.setEnabled(false);
         jFormattedTextFieldNascimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,6 +190,11 @@ public class FormPaciente extends javax.swing.JFrame {
 
         jTextFieldRua.setEnabled(false);
 
+        try {
+            jFormattedTextFieldCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jFormattedTextFieldCEP.setEnabled(false);
         jFormattedTextFieldCEP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -400,7 +420,29 @@ public class FormPaciente extends javax.swing.JFrame {
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         model.setPesquisa(jTextFieldPesquisar.getText());
         BeanPaciente bm = control.buscaPaciente(model);
-        jTextFieldFormNome.setText(bm.getNome());
+        if(jTextFieldPesquisar.getText().equalsIgnoreCase("")){
+            jTextFieldFormNome.setText("");
+            jTextFieldID.setText("");
+            jTextFieldPesquisar.setText("");
+            jFormattedTextFieldNascimento.setText("");
+            jFormattedTextFieldRG.setText("");
+            jFormattedTextFieldTelefone.setText("");
+            jTextFieldBairro.setText("");
+            jTextFieldComplemento.setText("");
+            jTextFieldRua.setText("");
+            jFormattedTextFieldCEP.setText("");
+        }else{
+            jTextFieldFormNome.setText(bm.getNome());
+            jTextFieldID.setText(String.valueOf(bm.getCodigo()));
+            jTextFieldPesquisar.setText(bm.getPesquisa());
+            jFormattedTextFieldNascimento.setText(bm.getNascimento());
+            jFormattedTextFieldRG.setText(bm.getRg());
+            jFormattedTextFieldTelefone.setText(bm.getTelefone());
+            jTextFieldBairro.setText(bm.getBairro());
+            jTextFieldComplemento.setText(bm.getComplemento());
+            jTextFieldRua.setText(bm.getRua());
+            jFormattedTextFieldCEP.setText(bm.getCep());
+        }
         preencherTabela("select * from pacientes where nome_paciente like'%" + bm.getPesquisa() + "%'");
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
@@ -456,6 +498,7 @@ public class FormPaciente extends javax.swing.JFrame {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         jTextFieldFormNome.setEnabled(!true);
         jButtonSalvar.setEnabled(!true);
+        jButtonNovo.setEnabled(true);
         jButtonCancelar.setEnabled(!true);
         jButtonEditar.setEnabled(false);
         jButtonExcluir.setEnabled(false);
@@ -484,17 +527,23 @@ public class FormPaciente extends javax.swing.JFrame {
         if (jTextFieldFormNome.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Nome para continuar!");
             jTextFieldFormNome.requestFocus();
-        }else if (jFormattedTextFieldNascimento.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo Nascimento para continuar!");
+        }else if (jFormattedTextFieldNascimento.getText().equals("  /  /    ")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Nascimento corretamente para continuar!");
             jTextFieldFormNome.requestFocus();
-        }else if (jFormattedTextFieldRG.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo RG para continuar!");
+        }else if (jFormattedTextFieldRG.getText().equals("        - ")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo RG corretamente para continuar!");
             jTextFieldFormNome.requestFocus();
-        }else if (jTextFieldRua.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo Rua para continuar!");
+        }else if (jTextFieldRua.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Rua corretamente para continuar!");
             jTextFieldFormNome.requestFocus();
-        }else if (jFormattedTextFieldCEP.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo CEP para continuar!");
+        }else if (jFormattedTextFieldCEP.getText().equals("     -   ")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo CEP corretamente para continuar!");
+            jTextFieldFormNome.requestFocus();
+        }else if (jFormattedTextFieldTelefone.getText().equals("(  )     -    ")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Telefone corretamente para continuar!");
+            jTextFieldFormNome.requestFocus();
+        }else if (jFormattedTextFieldRG.getText().equals("        - ")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo RG corretamente para continuar!");
             jTextFieldFormNome.requestFocus();
         }else if (flag == 1) {
             model.setNome(jTextFieldFormNome.getText());
@@ -530,6 +579,22 @@ public class FormPaciente extends javax.swing.JFrame {
             jFormattedTextFieldTelefone.setEnabled(false);
             preencherTabela("select * from pacientes order by nome_paciente");
         }else{
+            if (jTextFieldFormNome.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha o campo Nome para continuar!");
+                jTextFieldFormNome.requestFocus();
+            }else if (jFormattedTextFieldNascimento.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha o campo Nascimento para continuar!");
+                jTextFieldFormNome.requestFocus();
+            }else if (jFormattedTextFieldRG.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha o campo RG para continuar!");
+                jTextFieldFormNome.requestFocus();
+            }else if (jTextFieldRua.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha o campo Rua para continuar!");
+                jTextFieldFormNome.requestFocus();
+            }else if (jFormattedTextFieldCEP.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha o campo CEP para continuar!");
+                jTextFieldFormNome.requestFocus();
+            }
             model.setCodigo(Integer.parseInt(jTextFieldID.getText()));
             model.setNome(jTextFieldFormNome.getText());
             model.setNascimento(jFormattedTextFieldNascimento.getText());
@@ -572,6 +637,7 @@ public class FormPaciente extends javax.swing.JFrame {
         jTextFieldFormNome.setEnabled(true);
         jButtonSalvar.setEnabled(true);
         jButtonCancelar.setEnabled(true);
+        jButtonNovo.setEnabled(false);
         jButtonEditar.setEnabled(false);
         jButtonExcluir.setEnabled(false);
         jTextFieldPesquisar.setEnabled(false);
@@ -620,6 +686,18 @@ public class FormPaciente extends javax.swing.JFrame {
         conecta.disconnection();
         jButtonEditar.setEnabled(true);
         jButtonExcluir.setEnabled(true);
+        jButtonNovo.setEnabled(false);
+        jButtonSalvar.setEnabled(false);
+        jButtonCancelar.setEnabled(true);
+        jTextFieldID.setEnabled(false);
+        jTextFieldFormNome.setEnabled(false);
+        jFormattedTextFieldNascimento.setEnabled(false);
+        jFormattedTextFieldRG.setEnabled(false);
+        jFormattedTextFieldTelefone.setEnabled(false);
+        jTextFieldRua.setEnabled(false);
+        jFormattedTextFieldCEP.setEnabled(false);
+        jTextFieldComplemento.setEnabled(false);
+        jTextFieldBairro.setEnabled(false);
     }//GEN-LAST:event_jTablePacientesMouseClicked
 
     private void jFormattedTextFieldNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNascimentoActionPerformed

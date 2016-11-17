@@ -19,6 +19,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     ConexaoBD conecta = new ConexaoBD(); 
     FormMedico form_medico = new FormMedico();
     FormUsuario form_usuario = new FormUsuario();
+    FormPaciente form_paciente = new FormPaciente();
+    FormAgenda form_agenda = new FormAgenda();
     
     
     public TelaPrincipal(String usuario) {
@@ -47,7 +49,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanelInternal = new javax.swing.JPanel();
         jButtonAgenda = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonCadPaciente = new javax.swing.JButton();
         jButtonCadEnfermeiras = new javax.swing.JButton();
         jButtonCadMedicos = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -57,13 +59,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabelFundoTelaPrincipal = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
-        jMenuItemCadMedico = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItemEnfermeiras = new javax.swing.JMenuItem();
-        jMenuItemCadUsuario = new javax.swing.JMenuItem();
+        jMenuItemMedico = new javax.swing.JMenuItem();
+        jMenuItemPaciente = new javax.swing.JMenuItem();
+        jMenuItemUsuario = new javax.swing.JMenuItem();
+        jMenuItemAgendamento = new javax.swing.JMenuItem();
         jMenuRelatório = new javax.swing.JMenu();
         jMenuFerramentas = new javax.swing.JMenu();
         jMenuItemTelaBoasVindas = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItemAgendamentoDoDia = new javax.swing.JMenuItem();
+        jMenuItemAgendaMedico = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
@@ -94,24 +99,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanelInternal.add(jButtonAgenda);
         jButtonAgenda.setBounds(20, 190, 130, 120);
 
-        jLabel3.setText("Agenda -");
+        jLabel3.setText("Agendamento -");
         jPanelInternal.add(jLabel3);
-        jLabel3.setBounds(20, 170, 70, 16);
+        jLabel3.setBounds(20, 170, 100, 16);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadPacientes.png"))); // NOI18N
-        jButton1.setToolTipText("Pacientes");
-        jPanelInternal.add(jButton1);
-        jButton1.setBounds(320, 40, 150, 120);
+        jButtonCadPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/People-Patient-Male-icon.png"))); // NOI18N
+        jButtonCadPaciente.setToolTipText("Pacientes");
+        jButtonCadPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadPacienteActionPerformed(evt);
+            }
+        });
+        jPanelInternal.add(jButtonCadPaciente);
+        jButtonCadPaciente.setBounds(180, 40, 150, 120);
 
-        jButtonCadEnfermeiras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-infermeira.png"))); // NOI18N
-        jButtonCadEnfermeiras.setToolTipText("Enfermeiras");
+        jButtonCadEnfermeiras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadPacientes.png"))); // NOI18N
+        jButtonCadEnfermeiras.setToolTipText("Usuários");
         jButtonCadEnfermeiras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCadEnfermeirasActionPerformed(evt);
             }
         });
         jPanelInternal.add(jButtonCadEnfermeiras);
-        jButtonCadEnfermeiras.setBounds(170, 40, 150, 120);
+        jButtonCadEnfermeiras.setBounds(350, 40, 150, 120);
 
         jButtonCadMedicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CadMedicos.png"))); // NOI18N
         jButtonCadMedicos.setToolTipText("Médicos");
@@ -157,27 +167,37 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuCadastro.setText("Cadastros");
 
-        jMenuItemCadMedico.setText("Médicos");
-        jMenuItemCadMedico.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemMedico.setText("Médicos");
+        jMenuItemMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCadMedicoActionPerformed(evt);
+                jMenuItemMedicoActionPerformed(evt);
             }
         });
-        jMenuCadastro.add(jMenuItemCadMedico);
+        jMenuCadastro.add(jMenuItemMedico);
 
-        jMenuItem1.setText("Pacientes");
-        jMenuCadastro.add(jMenuItem1);
-
-        jMenuItemEnfermeiras.setText("Enfermeiras");
-        jMenuCadastro.add(jMenuItemEnfermeiras);
-
-        jMenuItemCadUsuario.setText("Usuários");
-        jMenuItemCadUsuario.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemPaciente.setText("Pacientes");
+        jMenuItemPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCadUsuarioActionPerformed(evt);
+                jMenuItemPacienteActionPerformed(evt);
             }
         });
-        jMenuCadastro.add(jMenuItemCadUsuario);
+        jMenuCadastro.add(jMenuItemPaciente);
+
+        jMenuItemUsuario.setText("Usuários");
+        jMenuItemUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemUsuarioActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jMenuItemUsuario);
+
+        jMenuItemAgendamento.setText("Agendamento");
+        jMenuItemAgendamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAgendamentoActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jMenuItemAgendamento);
 
         jMenuBar1.add(jMenuCadastro);
 
@@ -196,6 +216,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuFerramentas);
 
+        jMenu2.setText("Agenda");
+
+        jMenuItemAgendamentoDoDia.setText("Agendamento do dia");
+        jMenuItemAgendamentoDoDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAgendamentoDoDiaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemAgendamentoDoDia);
+
+        jMenuItemAgendaMedico.setText("Agenda médico");
+        jMenuItemAgendaMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAgendaMedicoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemAgendaMedico);
+
+        jMenuBar1.add(jMenu2);
+
         jMenuSair.setText("Sair");
         jMenuSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -210,7 +250,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItemCadUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadUsuarioActionPerformed
+    private void jMenuItemUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUsuarioActionPerformed
          try {
             conecta.execulteSQL("select * from usuarios where  nome_usuario='" + jLabelUsuario.getText() + "'");
             conecta.rs.first();
@@ -230,7 +270,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "Você não tem permissão para esse acesso!") ;
         }
-    }//GEN-LAST:event_jMenuItemCadUsuarioActionPerformed
+    }//GEN-LAST:event_jMenuItemUsuarioActionPerformed
 
     private void jMenuItemTelaBoasVindasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTelaBoasVindasActionPerformed
         jInternalFrameBemVindo.setVisible(true);
@@ -258,18 +298,54 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCadMedicosActionPerformed
 
     private void jButtonCadEnfermeirasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadEnfermeirasActionPerformed
-        // TODO add your handling code here:
+         try {
+            conecta.execulteSQL("select * from usuarios where  nome_usuario='" + jLabelUsuario.getText() + "'");
+            conecta.rs.first();
+            if(conecta.rs.getString("tipo_usuario").equals("Administrador")){
+                if(form_usuario==null){
+                    form_usuario = new FormUsuario();
+                    form_usuario.setVisible(true);
+                    form_usuario.setResizable(false);
+                }else{
+                    form_usuario.setVisible(true);
+                    form_usuario.setResizable(false);
+                }
+                
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Você não tem permissão para esse acesso!");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Você não tem permissão para esse acesso!") ;
+        }
     }//GEN-LAST:event_jButtonCadEnfermeirasActionPerformed
 
     private void jButtonAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendaActionPerformed
-        // TODO add your handling code here:
+         try {
+            conecta.execulteSQL("select * from usuarios where  nome_usuario='" + jLabelUsuario.getText() + "'");
+            conecta.rs.first();
+            if(conecta.rs.getString("tipo_usuario").equals("Administrador")){
+                if(form_agenda==null){
+                    form_agenda = new FormAgenda();
+                    form_agenda.setVisible(true);
+                    form_agenda.setResizable(false);
+                }else{
+                    form_agenda.setVisible(true);
+                    form_agenda.setResizable(false);
+                }
+                
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Você não tem permissão para esse acesso!");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Você não tem permissão para esse acesso!") ;
+        }
     }//GEN-LAST:event_jButtonAgendaActionPerformed
 
     private void jButtonFecharBemVindoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharBemVindoActionPerformed
         jInternalFrameBemVindo.dispose();
     }//GEN-LAST:event_jButtonFecharBemVindoActionPerformed
 
-    private void jMenuItemCadMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadMedicoActionPerformed
+    private void jMenuItemMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMedicoActionPerformed
         try {
             conecta.execulteSQL("select * from usuarios where  nome_usuario='" + jLabelUsuario.getText() + "'");
             conecta.rs.first();
@@ -289,11 +365,85 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "Você não tem permissão para esse acesso!") ;
         }
-    }//GEN-LAST:event_jMenuItemCadMedicoActionPerformed
+    }//GEN-LAST:event_jMenuItemMedicoActionPerformed
 
     private void jMenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSairMouseClicked
         System.exit(0);
     }//GEN-LAST:event_jMenuSairMouseClicked
+
+    private void jMenuItemPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPacienteActionPerformed
+        try {
+            conecta.execulteSQL("select * from usuarios where  nome_usuario='" + jLabelUsuario.getText() + "'");
+            conecta.rs.first();
+            if(conecta.rs.getString("tipo_usuario").equals("Administrador")){
+                if(form_paciente==null){
+                    form_paciente = new FormPaciente();
+                    form_paciente.setVisible(true);
+                    form_paciente.setResizable(false);
+                }else{
+                    form_paciente.setVisible(true);
+                    form_paciente.setResizable(false);
+                }
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Você não tem permissão para esse acesso!");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Você não tem permissão para esse acesso!") ;
+        }
+    }//GEN-LAST:event_jMenuItemPacienteActionPerformed
+
+    private void jButtonCadPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadPacienteActionPerformed
+        try {
+            conecta.execulteSQL("select * from usuarios where  nome_usuario='" + jLabelUsuario.getText() + "'");
+            conecta.rs.first();
+            if(conecta.rs.getString("tipo_usuario").equals("Administrador")){
+                if(form_paciente==null){
+                    form_paciente = new FormPaciente();
+                    form_paciente.setVisible(true);
+                    form_paciente.setResizable(false);
+                }else{
+                    form_paciente.setVisible(true);
+                    form_paciente.setResizable(false);
+                }
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Você não tem permissão para esse acesso!");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Você não tem permissão para esse acesso!") ;
+        }
+    }//GEN-LAST:event_jButtonCadPacienteActionPerformed
+
+    private void jMenuItemAgendamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAgendamentoActionPerformed
+        try {
+            conecta.execulteSQL("select * from usuarios where  nome_usuario='" + jLabelUsuario.getText() + "'");
+            conecta.rs.first();
+            if(conecta.rs.getString("tipo_usuario").equals("Administrador")){
+                if(form_agenda==null){
+                    form_agenda = new FormAgenda();
+                    form_agenda.setVisible(true);
+                    form_agenda.setResizable(false);
+                }else{
+                    form_agenda.setVisible(true);
+                    form_agenda.setResizable(false);
+                }
+                
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Você não tem permissão para esse acesso!");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Você não tem permissão para esse acesso!") ;
+        }
+    }//GEN-LAST:event_jMenuItemAgendamentoActionPerformed
+
+    private void jMenuItemAgendamentoDoDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAgendamentoDoDiaActionPerformed
+        FormAgendaMedico agenda = new FormAgendaMedico();
+        agenda.setVisible(true);
+    }//GEN-LAST:event_jMenuItemAgendamentoDoDiaActionPerformed
+
+    private void jMenuItemAgendaMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAgendaMedicoActionPerformed
+        FormAgendamentoMedico tela = new FormAgendamentoMedico();
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItemAgendaMedicoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,10 +481,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAgenda;
     private javax.swing.JButton jButtonCadEnfermeiras;
     private javax.swing.JButton jButtonCadMedicos;
+    private javax.swing.JButton jButtonCadPaciente;
     private javax.swing.JButton jButtonFecharBemVindo;
     private javax.swing.JInternalFrame jInternalFrameBemVindo;
     private javax.swing.JLabel jLabel1;
@@ -345,14 +495,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPainelFundo;
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastro;
     private javax.swing.JMenu jMenuFerramentas;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItemCadMedico;
-    private javax.swing.JMenuItem jMenuItemCadUsuario;
-    private javax.swing.JMenuItem jMenuItemEnfermeiras;
+    private javax.swing.JMenuItem jMenuItemAgendaMedico;
+    private javax.swing.JMenuItem jMenuItemAgendamento;
+    private javax.swing.JMenuItem jMenuItemAgendamentoDoDia;
+    private javax.swing.JMenuItem jMenuItemMedico;
+    private javax.swing.JMenuItem jMenuItemPaciente;
     private javax.swing.JMenuItem jMenuItemTelaBoasVindas;
+    private javax.swing.JMenuItem jMenuItemUsuario;
     private javax.swing.JMenu jMenuRelatório;
     private javax.swing.JMenu jMenuSair;
     private javax.swing.JPanel jPanelInternal;
